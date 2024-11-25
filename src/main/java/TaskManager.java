@@ -8,8 +8,14 @@ public class TaskManager {
 
     public static void addNewTask(String description) {
        tasks = FileManager.loadTasks();
-       Task newTask = new Task(UUID.randomUUID().toString(), description, TaskStatus.TODO, new Date(), new Date());
-        tasks.add(newTask);
+       Task newTask = new Task();
+
+       newTask.setId(UUID.randomUUID().toString());
+       newTask.setDescription(description);
+       newTask.setStatus(TaskStatus.TODO);
+       newTask.setCreatedAt(System.currentTimeMillis());
+
+       tasks.add(newTask);
         FileManager.saveTasks(tasks);
         System.out.println("New task added: " + newTask.getDescription());
     }

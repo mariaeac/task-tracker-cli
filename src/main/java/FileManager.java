@@ -2,6 +2,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FileManager {
@@ -11,9 +12,10 @@ public class FileManager {
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
             return new ObjectMapper().readValue(br, new TypeReference<List<Task>>() {});
         } catch (FileNotFoundException e) {
-            return null;
+            return new ArrayList<>();
         } catch (IOException e) {
-            return null;
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 

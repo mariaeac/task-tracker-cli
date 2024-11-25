@@ -2,17 +2,18 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Task {
-    private Integer id;
+    private String id;
     private String description;
     private TaskStatus status;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private Long createdAt;
+    private Long updatedAt;
 
-    public Task(String string, String description, TaskStatus todo, Date date, Date date1) {
 
-    }
+    public Task() {
 
-    public Task(Integer id, String description, TaskStatus status, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    };
+
+    public Task(String id, String description, TaskStatus status, Long createdAt, Long updatedAt) {
         this.id = id;
         this.description = description;
         this.status = status;
@@ -20,11 +21,11 @@ public class Task {
         this.updatedAt = updatedAt;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -44,19 +45,19 @@ public class Task {
         this.status = status;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Long getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public Long getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(Long updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
