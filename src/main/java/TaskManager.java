@@ -16,7 +16,29 @@ public class TaskManager {
        newTask.setCreatedAt(System.currentTimeMillis());
 
        tasks.add(newTask);
+       FileManager.saveTasks(tasks);
+    }
+
+    public static List<Task> listTasks() {
+        tasks = FileManager.loadTasks();
+        if(tasks.isEmpty()) {
+            throw new RuntimeException("No tasks loaded");
+        }
+        return tasks;
+    }
+
+    public static void deleteTask(Integer i) {
+        Task task = getTaskbyIndex(i);
+        String taskId = task.getId();
+        tasks.removeIf(t-> t.getId().equals(taskId));
         FileManager.saveTasks(tasks);
-        System.out.println("New task added: " + newTask.getDescription());
+    }
+    public static Task getTaskbyIndex(Integer index) {
+        tasks = FileManager.loadTasks();
+        if (index >= 0 && index < tasks.size() ) {
+            return tasks.get(index);
+        } else {
+            throw new RuntimeException("Index out of bounds");
+        }
     }
 }
