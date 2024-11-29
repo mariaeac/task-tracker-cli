@@ -37,6 +37,22 @@ public class Main {
                 tasks = TaskManager.listTasks();
                 break;
             case "mark":
+                if (args.length < 2) {
+                    System.out.println("Informe o ID da tarefa que será modificada");
+                    break;
+                }
+
+                if (args.length < 3) {
+                    System.out.println("Informe o Status");
+                    break;
+                }
+
+                strIndex = args[1];
+                indexRemove = Integer.parseInt(strIndex);
+                indexRemove -= 1;
+
+                TaskStatus status = TaskStatus.valueOf(args[2]);
+                TaskManager.updateTaskStatus(indexRemove, status);
                 break;
             case "update":
                 if (args.length < 2) {
