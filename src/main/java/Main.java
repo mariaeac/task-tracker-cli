@@ -4,10 +4,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         if (args.length < 1) {
-            System.out.println("Como usar: taskt-cli <comando> <parâmetros>");
-            System.out.println("add: adiciona uma nova tarefa");
-            System.out.println("list: lista as tarefas");
-            System.out.println("remove: remover uma nova tarefa");
+            CLIHelper.printHelp();
             return;
         }
 
@@ -32,12 +29,33 @@ public class Main {
                     index++;
                 }
                 break;
-            case "remove":
+            case "delete":
                 String strIndex = args[1];
                 Integer indexRemove = Integer.parseInt(strIndex);
                 indexRemove -= 1;
                 TaskManager.deleteTask(indexRemove);
                 tasks = TaskManager.listTasks();
+                break;
+            case "mark":
+                break;
+            case "update":
+                if (args.length < 2) {
+                    System.out.println("Informe o ID da tarefa que será modificada");
+                    break;
+                }
+
+                if (args.length < 3) {
+                    System.out.println("Insira a nova descrição");
+                    break;
+                }
+                strIndex = args[1];
+                indexRemove = Integer.parseInt(strIndex);
+                indexRemove -= 1;
+
+                TaskManager.updateTaskDesc(indexRemove, args[2]);
+
+                System.out.println("Tarefa atualizada com sucesso!");
+                TaskManager.listTasks();
                 break;
             default:
                 System.out.println("Comando inválido!");

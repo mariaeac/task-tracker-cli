@@ -22,7 +22,7 @@ public class TaskManager {
     public static List<Task> listTasks() {
         tasks = FileManager.loadTasks();
         if(tasks.isEmpty()) {
-            throw new RuntimeException("No tasks loaded");
+            throw new RuntimeException("No tasks  loaded");
         }
         return tasks;
     }
@@ -33,6 +33,18 @@ public class TaskManager {
         tasks.removeIf(t-> t.getId().equals(taskId));
         FileManager.saveTasks(tasks);
     }
+
+    public static void updateTaskStatus(Integer i, TaskStatus status) {
+        Task task = getTaskbyIndex(i);
+        String taskId = task.getId();
+
+        switch (status) {
+            case IN_PROGRESS -> task.setStatus(TaskStatus.IN_PROGRESS);
+            case DONE -> task.setStatus(TaskStatus.DONE);
+        }
+        FileManager.saveTasks(tasks);
+    }
+
     public static Task getTaskbyIndex(Integer index) {
         tasks = FileManager.loadTasks();
         if (index >= 0 && index < tasks.size() ) {
@@ -40,5 +52,11 @@ public class TaskManager {
         } else {
             throw new RuntimeException("Index out of bounds");
         }
+    }
+    public static void updateTaskDesc(Integer index, String description) {
+        Task task = getTaskbyIndex(index);
+        String taskId = task.getId();
+        task.setDescription(description);
+        FileManager.saveTasks(tasks);
     }
 }
